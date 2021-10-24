@@ -26,9 +26,6 @@ export class AuthenticationController {
     }
 
  
-
-
-
     static async signup(req: Request, res: Response) {
         let { username, useremail, userpassword } = req.body;
         let jwt_secret_key = process.env.JWT_SECRET_KEY as string
