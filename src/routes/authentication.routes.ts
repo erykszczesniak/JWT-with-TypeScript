@@ -3,6 +3,7 @@ import { AuthenticationController } from "../controllers/authentication.controll
 
 const authrouter = Router()
 
+authrouter.get("/posts", AuthenticationController.showPosts);
 authrouter.post("/signup", AuthenticationController.signup);
 
 export {authrouter};
