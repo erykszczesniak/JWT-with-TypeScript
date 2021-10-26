@@ -1,12 +1,12 @@
 import { EntityRepository, Repository } from "typeorm";
-import { UserEntity} from "../routes/user.enity";
+import { UserEntity } from "../entity/user.entity";
 import { Request, Response } from "express";
 
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> {
-    async saveUserData(req: Request, res: Response) {
-    let { username, useremail, userpassword } = req.body;
+    async saveUserData(req: Request, res: Response, hashedPassword : any) {
+    let { username, useremail,  } = req.body;
     let checkIfUserExists = 
     (await this.createQueryBuilder("users")
         .select()
@@ -17,19 +17,21 @@ export class UserRepository extends Repository<UserEntity> {
      .getCount()) > 0;
 
      if (checkIfUserExists) {
-         return res.send({
+         return res.send({ 
              authenticated: false,
              message:"User already exists",
 
 
          });
      }
-         this.createQueryBuilder("users").insert().values({
+         this.createQueryBuilder("users")
+         .insert()
+         .values({
            useremail,
-           userpassword,
+           userpassword: hashedPassword,
            username,
 
-         }).execute
+         }).execute();
 
     }
     }

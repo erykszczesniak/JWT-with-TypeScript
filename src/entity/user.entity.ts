@@ -1,4 +1,3 @@
-
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("users")
@@ -6,24 +5,17 @@ export class UserEntity extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id!: string;
-
     @Column({
-    nullable: false, 
+        nullable: false,
     })
     username!: string;
-
     @Column({
-    nullable: false, 
+        nullable: false,
     })
     useremail!: string;
-    
     @Column({
-    nullable: false, 
+        nullable: false
     })
     userpassword!: string;
-        
-        
-    
-
 
 }
